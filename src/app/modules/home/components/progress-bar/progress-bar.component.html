@@ -1,0 +1,18 @@
+<div class="flex gap-4 items-center">
+  <span
+    class="font-semibold"
+    [ngClass]="progress >= 100 ? 'text-green-400' : 'text-blue-400'"
+    >{{ progress }}%</span
+  >
+
+  <div
+    class="border-2 rounded-md border-blue-400 w-full h-3"
+    [ngClass]="progress >= 100 ? 'border-green-400' : 'border-blue-400'"
+  >
+    <div
+      [style.width.%]="progress"
+      class="transition-transform h-full"
+      [ngClass]="progress >= 100 ? 'bg-green-400' : 'bg-blue-400'"
+    ></div>
+  </div>
+</div>
