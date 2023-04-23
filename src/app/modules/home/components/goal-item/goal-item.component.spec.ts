@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GoalItemComponent } from './goal-item.component';
-import { Goal } from 'src/app/modules/models/goal';
+import { Goal } from 'src/app/modules/home/models/goal.model';
 import { MockComponent } from 'ng-mocks';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { By } from '@angular/platform-browser';
