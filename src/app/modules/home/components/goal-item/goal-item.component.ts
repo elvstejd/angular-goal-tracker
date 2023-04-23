@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Goal } from 'src/app/modules/models/goal';
+import { Goal } from 'src/app/modules/home/models/goal.model';
 
 @Component({
   selector: 'app-goal-item',
