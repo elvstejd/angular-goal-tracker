@@ -34,10 +34,14 @@ export class AuthService {
   }
 
   login({ username, password }: { username: string; password: string }) {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
     return this.http
       .post<{ access_token: string; token_type: string }>(
         `${this.apiUrl}/token`,
-        { username, password }
+        formData
       )
       .pipe(
         map((user: { access_token: string; token_type: string }) => {
