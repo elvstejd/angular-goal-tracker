@@ -11,7 +11,7 @@ export class AuthService {
   private userSubject!: BehaviorSubject<User>;
   public user$!: Observable<User>;
 
-  private apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     const user = this.getUserFromLocalStorage();
@@ -51,8 +51,7 @@ export class AuthService {
 
           return loggedInUser;
         })
-      )
-      .subscribe();
+      );
   }
 
   logout() {
@@ -61,6 +60,6 @@ export class AuthService {
   }
 
   getCurrentToken() {
-    return this.user$.pipe(map((user) => user.token)).subscribe();
+    return this.userSubject.value.token || null;
   }
 }
