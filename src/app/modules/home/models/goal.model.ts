@@ -3,5 +3,5 @@ export interface Goal {
   title: string;
   due_date: string;
   progress: number;
-  user: string;
+  user?: string;
 }
