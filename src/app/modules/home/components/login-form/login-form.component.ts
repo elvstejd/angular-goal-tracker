@@ -16,8 +16,11 @@ export class LoginFormComponent {
 
   onSubmit() {
     this.authService.login(this.formData).subscribe(() => {
-      console.log('Logged in');
-      window.location.reload();
+      this.reloadPage();
     });
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 }
