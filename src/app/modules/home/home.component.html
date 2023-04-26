@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="max-w-2xl mx-auto">
+  <h1
+    class="text-2xl font-bold text-gray-800 my-4 border-b-2 border-gray-200 pb-2"
+  >
+    My Goals
+  </h1>
+  <app-goal-list [goals]="goals" />
+</div>
+<app-modal
+  *ngIf="showLoginModal"
+  title="Mock Login"
+  subtitle="✅: Any username and password will work"
+>
+  <app-login-form modal-body />
+</app-modal>
