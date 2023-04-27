@@ -8,6 +8,7 @@ import { GoalListComponent } from './components/goal-list/goal-list.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { GoalFormComponent } from './components/goal-form/goal-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     GoalListComponent,
     LoginFormComponent,
     ModalComponent,
+    GoalFormComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, FormsModule],
 })
