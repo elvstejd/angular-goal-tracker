@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { GoalStoreService } from './services/goal-store.service';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Goal } from './models/goal.model';
 import { GoalService } from './services/goal.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +11,19 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  goals: Goal[] = [];
   showLoginModal = false;
   showAddGoalForm = false;
+  goal$!: Observable<Goal[]>;
 
   constructor(
     private goalService: GoalService,
+    private goalStoreService: GoalStoreService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.goal$ = goalStoreService.goal$;
+  }
 
   ngOnInit(): void {
-    this.goalService.getGoals().subscribe((goals) => {
-      this.goals = goals;
-    });
-
     this.authService.user$.subscribe((user) => {
       console.log(user, 'user changed');
 
@@ -34,7 +35,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleAddGoalClick() {
+  openAddGoalModal() {
     this.showAddGoalForm = true;
+  }
+
+  closeAddGoalModal() {
+    this.showAddGoalForm = false;
+  }
+
+  async handleAddGoal(goal: Goal) {
+    const tempId = (await firstValueFrom(this.goal$)).length + 1.11;
+
+    this.goalStoreService.addGoal({ ...goal, id: tempId });
+    this.showAddGoalForm = false;
+
+    this.goalService.postGoal(goal).subscribe((goal) => {
+      this.goalStoreService.updateGoal(tempId, goal);
+    });
   }
 }

@@ -4,7 +4,9 @@
   >
     My Goals
   </h1>
-  <app-goal-list [goals]="goals" />
+  <ng-container *ngIf="goal$ | async as goals">
+    <app-goal-list [goals]="goals" (onAddGoalClick)="openAddGoalModal()" />
+  </ng-container>
 </div>
 <app-modal
   *ngIf="showLoginModal"
@@ -12,4 +14,11 @@
   subtitle="✅: Any username and password will work"
 >
   <app-login-form modal-body />
+</app-modal>
+<app-modal
+  *ngIf="showAddGoalForm"
+  title="Add goal"
+  (onClose)="closeAddGoalModal()"
+>
+  <app-goal-form (onSubmit)="handleAddGoal($event)" />
 </app-modal>
