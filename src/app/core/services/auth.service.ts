@@ -14,12 +14,13 @@ export class AuthService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
-    const user = this.getUserFromLocalStorage();
+    this.userSubject = new BehaviorSubject<User>({ username: '' });
 
-    if (user) {
-      this.userSubject = new BehaviorSubject<User>(user);
-    } else {
-      this.userSubject = new BehaviorSubject<User>({ username: '' });
+    const userInLocalStorage = this.getUserFromLocalStorage();
+
+    if (userInLocalStorage?.token) {
+      const tokenIsValid = !this.tokenExpired(userInLocalStorage?.token);
+      if (tokenIsValid) this.userSubject.next(userInLocalStorage);
     }
 
     this.user$ = this.userSubject.asObservable();
@@ -65,5 +66,10 @@ export class AuthService {
 
   getCurrentToken() {
     return this.userSubject.value.token || null;
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
   }
 }
