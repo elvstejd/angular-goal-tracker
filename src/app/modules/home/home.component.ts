@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
-      console.log(user, 'user changed');
-
       if (user.username === '') {
         this.showLoginModal = true;
       } else {
