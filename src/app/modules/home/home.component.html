@@ -5,7 +5,11 @@
     My Goals
   </h1>
   <ng-container *ngIf="goal$ | async as goals">
-    <app-goal-list [goals]="goals" (onAddGoalClick)="openAddGoalModal()" />
+    <app-goal-list
+      [goals]="goals"
+      (onAddGoalClick)="openAddGoalModal()"
+      (onGoalClick)="openEditGoalModal($event)"
+    />
   </ng-container>
 </div>
 <app-modal
@@ -16,9 +20,12 @@
   <app-login-form modal-body />
 </app-modal>
 <app-modal
-  *ngIf="showAddGoalForm"
-  title="Add goal"
-  (onClose)="closeAddGoalModal()"
+  *ngIf="showGoalForm"
+  [title]="goalToEdit ? 'Edit goal' : 'Add goal'"
+  (onClose)="closeGoalModal()"
 >
-  <app-goal-form (onSubmit)="handleAddGoal($event)" />
+  <app-goal-form
+    (onSubmit)="handleGoalSubmit($event)"
+    [editGoal]="goalToEdit"
+  />
 </app-modal>

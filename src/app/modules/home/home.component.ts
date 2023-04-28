@@ -12,8 +12,9 @@ import { GoalService } from './services/goal.service';
 })
 export class HomeComponent implements OnInit {
   showLoginModal = false;
-  showAddGoalForm = false;
+  showGoalForm = false;
   goal$!: Observable<Goal[]>;
+  goalToEdit: Goal | null = null;
 
   constructor(
     private goalService: GoalService,
@@ -36,21 +37,36 @@ export class HomeComponent implements OnInit {
   }
 
   openAddGoalModal() {
-    this.showAddGoalForm = true;
+    this.goalToEdit = null;
+    this.showGoalForm = true;
   }
 
-  closeAddGoalModal() {
-    this.showAddGoalForm = false;
+  closeGoalModal() {
+    this.showGoalForm = false;
   }
 
-  async handleAddGoal(goal: Goal) {
-    const tempId = (await firstValueFrom(this.goal$)).length + 1.11;
+  openEditGoalModal(goalId: number) {
+    const goal = this.goalStoreService.getGoal(goalId);
+    if (goal) {
+      this.showGoalForm = true;
+      this.goalToEdit = goal;
+    }
+  }
 
-    this.goalStoreService.addGoal({ ...goal, id: tempId });
-    this.showAddGoalForm = false;
+  async handleGoalSubmit(goal: Goal) {
+    if (goal.id) {
+      // we are updating an existing goal
+      this.goalStoreService.updateGoal(goal.id, goal);
+      this.goalService.updateGoal(goal).subscribe();
+    } else {
+      // we are adding a new goal
+      const tempId = (await firstValueFrom(this.goal$)).length + 1.11;
+      this.goalStoreService.addGoal({ ...goal, id: tempId });
+      this.goalService.postGoal(goal).subscribe((goal) => {
+        this.goalStoreService.updateGoal(tempId, goal);
+      });
+    }
 
-    this.goalService.postGoal(goal).subscribe((goal) => {
-      this.goalStoreService.updateGoal(tempId, goal);
-    });
+    this.showGoalForm = false;
   }
 }
