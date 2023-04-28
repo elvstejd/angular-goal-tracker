@@ -1,5 +1,9 @@
 <div class="bg-white p-4 rounded-md flex flex-col gap-3">
-  <app-goal-item *ngFor="let goal of goals" [goal]="goal" />
+  <app-goal-item
+    *ngFor="let goal of goals"
+    [goal]="goal"
+    (onClick)="handleGoalClick(goal.id ?? 0)"
+  />
   <button
     class="border-2 rounded-md p-3 py-4 flex justify-center items-center text-gray-500 text-sm cursor-pointer border-dashed hover:border-gray-400 transition-colors"
     (click)="handleAddGoalClick()"

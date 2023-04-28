@@ -8,7 +8,12 @@ import { Goal } from '../../models/goal.model';
 })
 export class GoalListComponent {
   @Output() onAddGoalClick = new EventEmitter<void>();
+  @Output() onGoalClick = new EventEmitter<number>();
   @Input() goals: Goal[] = [];
+
+  handleGoalClick(goalId: number) {
+    this.onGoalClick.emit(goalId);
+  }
 
   handleAddGoalClick() {
     this.onAddGoalClick.emit();
