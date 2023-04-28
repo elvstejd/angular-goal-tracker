@@ -16,6 +16,10 @@ export class GoalStoreService {
     });
   }
 
+  setGoals(goals: Goal[]) {
+    this.goalSubject.next(goals);
+  }
+
   getGoal(goalId: number) {
     const goals = this.goalSubject.getValue();
     return goals.find((goal) => goal.id === goalId);
