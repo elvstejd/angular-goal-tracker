@@ -27,8 +27,8 @@ export class GoalStoreService {
   }
 
   updateGoal(goalId: number, newGoal: Goal) {
-    const goals = this.goalSubject.getValue();
-    goals.map((goal) => {
+    let goals = this.goalSubject.getValue();
+    goals = goals.map((goal) => {
       if (goal.id === goalId) {
         return newGoal;
       }
