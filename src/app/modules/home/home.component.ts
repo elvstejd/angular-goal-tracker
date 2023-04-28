@@ -51,6 +51,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  handleGoalDelete(goalId: number) {
+    this.goalService.deleteGoal(goalId).subscribe();
+    this.goalStoreService.deleteGoal(goalId);
+  }
+
   async handleGoalSubmit(goal: Goal) {
     if (goal.id) {
       // we are updating an existing goal

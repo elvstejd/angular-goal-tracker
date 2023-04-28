@@ -26,6 +26,7 @@
 >
   <app-goal-form
     (onSubmit)="handleGoalSubmit($event)"
+    (onDeleteClick)="handleGoalDelete($event)"
     [editGoal]="goalToEdit"
   />
 </app-modal>

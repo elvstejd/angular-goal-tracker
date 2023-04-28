@@ -13,7 +13,9 @@ export class GoalFormComponent implements OnInit {
     progress: 0,
   };
   @Output() onSubmit = new EventEmitter<typeof this.formData>();
+  @Output() onDeleteClick = new EventEmitter<number>();
   @Input() editGoal: Goal | null = null;
+
   buttonLabel = 'Add';
 
   ngOnInit(): void {
@@ -31,5 +33,9 @@ export class GoalFormComponent implements OnInit {
       ...this.formData,
       due_date: this.formData.due_date + 'T00:00:00',
     });
+  }
+
+  handleDeleteClick(goalId: number) {
+    this.onDeleteClick.emit(goalId);
   }
 }
