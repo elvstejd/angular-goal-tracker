@@ -16,6 +16,11 @@ export class GoalStoreService {
     });
   }
 
+  getGoal(goalId: number) {
+    const goals = this.goalSubject.getValue();
+    return goals.find((goal) => goal.id === goalId);
+  }
+
   addGoal(goal: Goal) {
     const goals = this.goalSubject.getValue();
     this.goalSubject.next([...goals, goal]);
