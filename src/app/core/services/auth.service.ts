@@ -68,7 +68,7 @@ export class AuthService {
     return this.userSubject.value.token || null;
   }
 
-  private tokenExpired(token: string) {
+  tokenExpired(token: string) {
     const expiry = JSON.parse(atob(token.split('.')[1])).exp;
     return Math.floor(new Date().getTime() / 1000) >= expiry;
   }
