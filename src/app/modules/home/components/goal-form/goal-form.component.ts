@@ -7,19 +7,20 @@ import { Goal } from '../../models/goal.model';
   styleUrls: ['./goal-form.component.css'],
 })
 export class GoalFormComponent implements OnInit {
-  formData = {
+  formData: Goal = {
     title: '',
     due_date: new Date().toISOString().substring(0, 10),
     progress: 0,
   };
-  @Output() onSubmit = new EventEmitter<typeof this.formData>();
+
+  @Output() onSubmit = new EventEmitter<Goal>();
   @Output() onDeleteClick = new EventEmitter<number>();
   @Input() editGoal: Goal | null = null;
 
   buttonLabel = 'Add';
 
   ngOnInit(): void {
-    if (this.editGoal) {
+    if (this.editGoal?.id) {
       this.buttonLabel = 'Edit';
       this.formData = {
         ...this.editGoal,
