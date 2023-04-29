@@ -10,7 +10,7 @@ export class RelativeDatePipe implements PipeTransform {
     this.today = new Date();
   }
 
-  transform(value: string): unknown {
+  transform(value: string): string {
     const target = new Date(value);
 
     const isTheSameDate =
