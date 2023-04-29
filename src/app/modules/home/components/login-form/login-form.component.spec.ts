@@ -65,8 +65,6 @@ describe('LoginFormComponent', () => {
 
     spyOn(authService, 'login').and.returnValue(of(user));
 
-    spyOn(component, 'reloadPage');
-
     component.formData = {
       username: 'test',
       password: 'test',
