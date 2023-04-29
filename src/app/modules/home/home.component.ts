@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
     private goalStoreService: GoalStoreService,
     private authService: AuthService
   ) {
+    goalService.getGoals().subscribe((goals) => {
+      goalStoreService.setGoals(goals);
+    });
     this.goal$ = goalStoreService.goal$;
   }
 

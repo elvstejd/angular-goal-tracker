@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { GoalService } from './goal.service';
 import { Goal } from '../models/goal.model';
 
 @Injectable({
@@ -9,12 +8,6 @@ import { Goal } from '../models/goal.model';
 export class GoalStoreService {
   goalSubject = new BehaviorSubject<Goal[]>([]);
   goal$ = this.goalSubject.asObservable();
-
-  constructor(goalService: GoalService) {
-    goalService.getGoals().subscribe((goals) => {
-      this.goalSubject.next(goals);
-    });
-  }
 
   setGoals(goals: Goal[]) {
     this.goalSubject.next(goals);
