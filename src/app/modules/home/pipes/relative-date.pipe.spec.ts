@@ -47,7 +47,7 @@ function generateRandomIntBetween(a: number, b: number): number {
     [a, b] = [b, a];
   }
   const range = b - a + 1;
-  const randomInt = Math.floor(Math.random() * range) + a;
+  const randomInt = Math.ceil(Math.random() * range) + a;
 
   return randomInt;
 }
