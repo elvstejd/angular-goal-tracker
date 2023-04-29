@@ -9,6 +9,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { GoalFormComponent } from './components/goal-form/goal-form.component';
+import { RelativeDatePipe } from './pipes/relative-date.pipe';
+import { SentenceCasePipe } from './pipes/sentence-case.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { GoalFormComponent } from './components/goal-form/goal-form.component';
     LoginFormComponent,
     ModalComponent,
     GoalFormComponent,
+    RelativeDatePipe,
+    SentenceCasePipe,
   ],
   imports: [CommonModule, HomeRoutingModule, FormsModule],
 })
