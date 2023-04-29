@@ -40,4 +40,10 @@ export class GoalStoreService {
     });
     this.goalSubject.next(goals);
   }
+
+  deleteGoal(goalId: number) {
+    let goals = this.goalSubject.getValue();
+    goals = goals.filter((goal) => goal.id !== goalId);
+    this.goalSubject.next(goals);
+  }
 }
