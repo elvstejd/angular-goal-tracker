@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8000',
+  production: process.env.NG_APP_ENV,
+  apiUrl: process.env.NG_APP_API_URLZZ,
 };
